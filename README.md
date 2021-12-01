@@ -20,6 +20,7 @@ The final step is to change the snake.py file to have executable permission.
   ```
   chmod u+x snake.py
   ```
+  Then run the program: ```./snake.py```
 ### How To Contribute
 1. Choose an issue you'd like to work on and make a comment on it.
 2. Fork the project repository.
