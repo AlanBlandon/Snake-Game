@@ -19,7 +19,7 @@ import pygame
 from player import Player
 from food import Food
 from button import Button
-
+from pygame import mixer
 
 pygame.init()  # Initialize all imported pygame modules.
 # Constant global variables:
@@ -260,6 +260,9 @@ class SnakeGame:
         """Run Game Function"""
         # Declare and initialize each variable that will be utilized while the
         # game is running.
+        mixer.init()
+        mixer.music.load('backgroundmusic.wav')
+        mixer.music.play()
         screen = pygame.display.set_mode([WIDTH, HEIGHT])
         score = delta_x = delta_y = counter = 0
         score_font = pygame.font.SysFont("ubuntu", 60, bold=True, italic=False)
@@ -361,6 +364,9 @@ class SnakeGame:
                 # If the snake touches/eats the food, increment the score and
                 # the snake length, then spawn a new food object.
                 if food.is_eaten(player_rect):
+                    mixer.init()
+                    mixer.music.load('eat.wav')
+                    mixer.music.play(1)
                     food_x = randrange(food_size, WIDTH - food_size)
                     food_y = randrange(food_size, HEIGHT - food_size)
                     snake_length += 1
