@@ -282,6 +282,12 @@ class SnakeGame:
         start_ticks = pygame.time.get_ticks()  # Get the time in milliseconds.
         clock = pygame.time.Clock()  # Create an object to help track time
         # While the game is running, continue the loop.
+        two_minutes = pygame.USEREVENT
+        bonus = True
+        # Repeatedly create an event on the event queue.
+        pygame.time.set_timer(update_score, 3000)
+        pygame.time.set_timer(two_minutes, 120000)
+        start_ticks = pygame.time.get_ticks()  # Get the time in milliseconds.
         game_is_running = True
         while game_is_running:
             # Calculate the number of seconds.
@@ -292,6 +298,14 @@ class SnakeGame:
                     self.end(seconds, 0)  # Call the end game function.
                 if event.type == update_score and counter >= 1:
                     score += 1  # Increment the score.
+                if event.type == two_minutes:
+                    if(bonus == True):
+                        score += 50
+                        bonus = False
+                        bonus_text = pygame.font.SysFont("ubuntu", 45, bold=True).render("Two Minute Bonus +50 points", True, WHITE_RGB)
+                        screen.blit(bonus_text,[WIDTH/4, HEIGHT/4])
+                        pygame.display.update()
+                        pygame.time.delay(2000)
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_LEFT and move_left_or_right:
                         delta_x = -snake_move_distance
